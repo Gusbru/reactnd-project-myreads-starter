@@ -14,13 +14,13 @@ class BooksApp extends React.Component {
     books: []
   }
 
-  addBook() {
+  addBook = () => {
     this.setState(prev => {
       const { books = [] } = prev;
       const newBook = {
         id: books.length + 1,
-        title: "test",
-        status: "Want to Read"
+        title: 'test',
+        status: 'Want to Read'
       };
       books.push(newBook);
       return { books: books }
@@ -57,7 +57,7 @@ class BooksApp extends React.Component {
           </div>
         </div>
         <div className="open-search">
-          <a >Add a book</a>
+          <a onClick={this.addBook}>Add a book</a>
         </div>
       </div>
     )
