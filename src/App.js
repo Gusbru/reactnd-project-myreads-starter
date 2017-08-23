@@ -20,11 +20,19 @@ class BooksApp extends React.Component {
       const newBook = {
         id: books.length + 1,
         title: 'test',
-        status: 'Want to Read'
+        author: 'Mark Twain',
+        status: 'Want to Read',
+        imageUrl: "http://books.google.com/books/content?id=32haAAAAMAAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE72yckZ5f5bDFVIf7BGPbjA0KYYtlQ__nWB-hI_YZmZ-fScYwFy4O_fWOcPwf-pgv3pPQNJP_sT5J_xOUciD8WaKmevh1rUR-1jk7g1aCD_KeJaOpjVu0cm_11BBIUXdxbFkVMdi&source=gbs_api"
       };
       books.push(newBook);
       return { books: books }
     });
+  }
+
+  changeStatus(newStatus, book) {
+    // this.state(function(state) {
+
+    // });
   }
 
   render() {
@@ -33,11 +41,7 @@ class BooksApp extends React.Component {
     // organize the books in three different collections,
     // according with the book status: "Currently Reading", "Want to Read"
     // and "Read"
-    const bookStatus = [
-      { status: 'Currently Reading', books },
-      { status: 'Want to Read', books },
-      { status: 'Read', books}
-    ];
+    const bookStatus = ['Currently Reading', 'Want to Read', 'Read'];
     return (
       <div className="app">
         <div className="list-books">
@@ -46,10 +50,10 @@ class BooksApp extends React.Component {
           </div>
           <div className="list-books-content">
             <div>
-              {bookStatus.map(book => (
+              {bookStatus.map(status => (
                 <Bookshelf 
-                  key={book.status} 
-                  status={book.status} 
+                  key={status} 
+                  status={status} 
                   bookList={books}
                 />
               ))}
