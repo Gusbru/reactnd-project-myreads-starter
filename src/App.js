@@ -4,14 +4,12 @@ import Bookshelf from './Bookshelf'
 import './App.css'
 
 class BooksApp extends React.Component {
-  state = {
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
-    books: []
+  constructor(props){
+    super(props);
+    this.state = {
+      books: []
+    };
+    this.changeStatus = this.changeStatus.bind(this);
   }
 
   addBook = () => {
@@ -29,10 +27,17 @@ class BooksApp extends React.Component {
     });
   }
 
-  changeStatus(newStatus, book) {
-    // this.state(function(state) {
-
-    // });
+  changeStatus(newStatus, currentBook) {
+    this.setState(function(state){
+      const { books = [] } = state;
+      const allBooks = books.filter(_ => _.id !== currentBook.id);
+      if (newStatus !== "none") {
+        currentBook.status = newStatus
+      }
+      allBooks.push(currentBook);
+      return{ books: allBooks };
+    })
+    console.log(newStatus);
   }
 
   render() {
@@ -55,6 +60,7 @@ class BooksApp extends React.Component {
                   key={status} 
                   status={status} 
                   bookList={books}
+                  changeStatus={this.changeStatus}
                 />
               ))}
             </div>
