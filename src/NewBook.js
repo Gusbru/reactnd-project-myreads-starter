@@ -5,7 +5,16 @@ import './NewBook.css';
 class NewBook extends Component {
 
     updateQuery = (inputText) => {
-        console.log(inputText);
+        let searchResult = this.props.search(inputText, 20);
+        searchResult
+        .then(function(result){
+            result.map((item)=>(
+                console.log(item.title)
+            ))
+        })
+        .catch(function(error){
+            console.log(error);
+        });
     }
 
     render(){
@@ -22,6 +31,9 @@ class NewBook extends Component {
                             onChange={(event) => this.updateQuery(event.target.value)}
                         />
                     </form>
+                </div>
+                <div className="search-books-results">
+                    
                 </div>
             </div>
         );
