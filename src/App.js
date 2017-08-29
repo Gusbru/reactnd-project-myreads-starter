@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link, Route } from 'react-router-dom';
 //import * as BooksAPI from './BooksAPI';
 import Bookshelf from './Bookshelf';
+import NewBook from './NewBook';
 import './App.css';
 
 class BooksApp extends React.Component {
@@ -48,26 +50,39 @@ class BooksApp extends React.Component {
     const bookStatus = ['Currently Reading', 'Want to Read', 'Read'];
     return (
       <div className="app">
-        <div className="list-books">
-          <div className="list-books-title">
-            <h1>MyReads</h1>
-          </div>
-          <div className="list-books-content">
-            <div>
-              {bookStatus.map(status => (
-                <Bookshelf 
-                  key={status} 
-                  status={status} 
-                  bookList={books}
-                  changeStatus={this.changeStatus}
-                />
-              ))}
+        <Route exact path="/" render={() => (
+          <div>
+          <div className="list-books">
+            <div className="list-books-title">
+              <h1>MyReads</h1>
+            </div>
+            <div className="list-books-content">
+              <div>
+                {bookStatus.map(status => (
+                  <Bookshelf 
+                    key={status} 
+                    status={status} 
+                    bookList={books}
+                    changeStatus={this.changeStatus}
+                  />
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-        <div className="open-search">
-          <a onClick={this.addBook}>Add a book</a>
-        </div>
+          {/* <a onClick={this.addBook}>Add a book</a> */}
+        <Link 
+          to="/newbook" 
+          className="open-search"
+        >Add a book</Link>
+          </div>
+        )}/>
+        <Route exact path="/newbook" render={() => (
+          <NewBook 
+            addBook={this.addBook}
+          />
+        )}/>
+
+        
       </div>
     )
   }

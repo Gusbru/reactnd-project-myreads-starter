@@ -1,7 +1,7 @@
 import React from 'react';
 import './Bookshelf.css';
 
-const Bookshelf = ({ status, bookList, changeStatus}) =>  {
+const Bookshelf = ({ status, bookList, changeStatus }) =>  {
     const currentBooks = bookList.filter(_ => _.status === status);
     return(
         <div key={status} className="bookshelf">
