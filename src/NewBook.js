@@ -1,19 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './NewBook.css';
 
-const NewBook = ({ addBook }) => {
-    return(
-        <div>
-            <div className="search-books-bar">
-                <Link 
-                    className="close-search" 
-                    to="/"
-                >Back</Link>
-                <input  type="text"/>
+class NewBook extends Component {
+
+    updateQuery = (inputText) => {
+        console.log(inputText);
+    }
+
+    render(){
+        return(
+            <div>
+                <div className="search-books-bar">
+                    <Link 
+                        className="close-search" 
+                        to="/"
+                    >Back</Link>
+                    <form>
+                        <input 
+                            type="text"
+                            onChange={(event) => this.updateQuery(event.target.value)}
+                        />
+                    </form>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
 
 export default NewBook;

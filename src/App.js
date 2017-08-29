@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Route } from 'react-router-dom';
-//import * as BooksAPI from './BooksAPI';
+import * as BooksAPI from './BooksAPI';
 import Bookshelf from './Bookshelf';
 import NewBook from './NewBook';
 import './App.css';
@@ -12,6 +12,12 @@ class BooksApp extends React.Component {
       books: []
     };
     this.changeStatus = this.changeStatus.bind(this);
+  }
+
+  componentDidMount(){
+    BooksAPI.getAll().then((books) => {
+      this.setState({ books })
+    });
   }
 
   addBook = () => {
@@ -52,28 +58,28 @@ class BooksApp extends React.Component {
       <div className="app">
         <Route exact path="/" render={() => (
           <div>
-          <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
-            </div>
-            <div className="list-books-content">
-              <div>
-                {bookStatus.map(status => (
-                  <Bookshelf 
-                    key={status} 
-                    status={status} 
-                    bookList={books}
-                    changeStatus={this.changeStatus}
-                  />
-                ))}
+            <div className="list-books">
+              <div className="list-books-title">
+                <h1>MyReads</h1>
+              </div>
+              <div className="list-books-content">
+                <div>
+                  {bookStatus.map(status => (
+                    <Bookshelf 
+                      key={status} 
+                      status={status} 
+                      bookList={books}
+                      changeStatus={this.changeStatus}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-          {/* <a onClick={this.addBook}>Add a book</a> */}
-        <Link 
-          to="/newbook" 
-          className="open-search"
-        >Add a book</Link>
+            {/* <a onClick={this.addBook}>Add a book</a> */}
+            <Link 
+              to="/newbook" 
+              className="open-search"
+            >Add a book</Link>
           </div>
         )}/>
         <Route exact path="/newbook" render={() => (
@@ -81,8 +87,6 @@ class BooksApp extends React.Component {
             addBook={this.addBook}
           />
         )}/>
-
-        
       </div>
     )
   }
