@@ -41,6 +41,7 @@ class BooksApp extends React.Component {
       allBooks.push(currentBook);
       return{ books: allBooks };
     });
+    BooksAPI.update(currentBook, newStatus);
   }
 
   render() {
