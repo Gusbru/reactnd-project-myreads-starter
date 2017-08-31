@@ -43,7 +43,7 @@ class NewBook extends Component {
                     
                 </div>
                 <div className="search-books-results">
-                    
+                {/* TODO: create a componente book and use here */}
                 <ol className="books-grid">
                         {showingBooks.map(item => (
                             <li key={item.id}>                 

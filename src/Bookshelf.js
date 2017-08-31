@@ -6,6 +6,7 @@ const Bookshelf = ({ status, shelf, bookList, changeStatus }) =>  {
     return(
         <div key={status} className="bookshelf">
             <h2 className="bookshelf-title">{shelf}</h2>
+            {/* TODO: create a componente book and use here */}
             <ol className="books-grid">
                 {currentBooks.map(item => (
                     <li key={item.id}>                 
