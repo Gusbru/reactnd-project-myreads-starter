@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Book from './Book';
 import './NewBook.css';
 
 class NewBook extends Component {
@@ -14,9 +15,11 @@ class NewBook extends Component {
         const self = this;
         this.props.search(inputText, 20)
         .then(function(item){
-            self.setState({
-                query: item
-            })
+            if(item.length > 0) {
+                self.setState({
+                    query: item
+                });
+            }
         })
         .catch(function(error){
             console.log(error);
@@ -27,7 +30,10 @@ class NewBook extends Component {
 
     render(){
         let showingBooks = this.state.query;
-        console.log("ShowingBooks = " + showingBooks);
+        console.log("ShowingBooks = " + showingBooks.length + " " + showingBooks);
+        if(showingBooks === undefined){
+            console.log("no books found!!!!!");
+        }
         return(
             <div>
                 <div className="search-books-bar">
@@ -35,38 +41,15 @@ class NewBook extends Component {
                         className="close-search" 
                         to="/"
                     >Back</Link>
-                    
                         <input 
                             type="text"
                             onChange={(event) => this.updateQuery(event.target.value)}
                         />
-                    
                 </div>
                 <div className="search-books-results">
-                {/* TODO: create a componente book and use here */}
-                <ol className="books-grid">
-                        {showingBooks.map(item => (
-                            <li key={item.id}>                 
-                                <div className="book">
-                                    <div className="book-top">
-                                        <div className="book-cover" style={{ width: 128, height: 192, backgroundImage: `url("${item.imageLinks.smallThumbnail}")` }}></div>
-                                        <div className="book-shelf-changer">
-                                            <select value={item.shelf} >
-                                                <option value="none" disabled>Move to...</option>
-                                                <option value="currentlyReading">Currently Reading</option>
-                                                <option value="wantToRead">Want to Read</option>
-                                                <option value="read">Read</option>
-                                                <option value="none">None</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div className="book-title">{item.title}</div>
-                                    <div className="book-authors">{item.authors}</div>
-                                </div>
-                            </li>
-                        ))}
-                    </ol>
-
+                <Book 
+                    currentBooks={showingBooks} 
+                    changeStatus={this.props.changeStatus}/>
                 </div>
             </div>
         );

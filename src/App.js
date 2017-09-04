@@ -87,6 +87,7 @@ class BooksApp extends React.Component {
           <NewBook 
             addBook={this.addBook}
             search={BooksAPI.search}
+            changeStatus={this.changeStatus}
           />
         )}/>
       </div>
