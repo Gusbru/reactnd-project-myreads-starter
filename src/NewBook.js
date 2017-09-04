@@ -30,10 +30,6 @@ class NewBook extends Component {
 
     render(){
         let showingBooks = this.state.query;
-        console.log("ShowingBooks = " + showingBooks.length + " " + showingBooks);
-        if(showingBooks === undefined){
-            console.log("no books found!!!!!");
-        }
         return(
             <div>
                 <div className="search-books-bar">
