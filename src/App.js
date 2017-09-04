@@ -76,7 +76,6 @@ class BooksApp extends React.Component {
                 </div>
               </div>
             </div>
-            {/* <a onClick={this.addBook}>Add a book</a> */}
             <Link 
               to="/newbook" 
               className="open-search"
