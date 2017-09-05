@@ -11,7 +11,6 @@ class BooksApp extends React.Component {
     this.state = {
       books: []
     };
-    this.changeStatus = this.changeStatus.bind(this);
   }
 
   componentDidMount(){
@@ -31,7 +30,7 @@ class BooksApp extends React.Component {
     });
   }
 
-  changeStatus(newStatus, currentBook) {
+  changeStatus = (newStatus, currentBook) => {
     this.setState(function(state){
       const { books = [] } = state;
       const allBooks = books.filter(_ => _.id !== currentBook.id);
