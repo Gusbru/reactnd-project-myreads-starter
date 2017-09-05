@@ -13,24 +13,25 @@ class NewBook extends Component {
 
     updateQuery = (inputText) => {
         const self = this;
-        //let alreadyHaveBooks;
         if(inputText.length > 0) {
             this.props.search(inputText, 20)
             .then(function(item){
                 if(item.length > 0) {
+                    item.map((searchedItems) => (
+                        searchedItems.shelf = "none"
+                    ))
+                    item.map((searchedItems) => (
+                        self.props.myCurrentBooks.map((myBooks) => (
+                            (myBooks.id === searchedItems.id 
+                                ? self.props.changeStatus(myBooks.shelf,searchedItems) 
+                                : searchedItems.shelf = "none") 
+                        ))
+                    ))
                     self.setState({
                         query: item
                     });
                 }
-                item.map((searchedItems) => (
-                    self.props.myCurrentBooks.map((myBooks) => (
-                        console.log(myBooks.id === searchedItems.id ? "ja tenho " + myBooks.id : "nao tenho")
-                        //changeStatus(myBooks.id === searchedItems.id ? myBooks.)
-                    ))
-                ))
-                // alreadyHaveBooks.map(_ => (
-                //     console.log("Ja tenho o livro " + _.id + " " + _.title)
-                // ))
+                
             })
             .catch(function(error){
                 console.log(error);
