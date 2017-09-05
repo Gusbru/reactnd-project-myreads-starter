@@ -11,7 +11,6 @@ class BooksApp extends React.Component {
     this.state = {
       books: []
     };
-    this.changeStatus = this.changeStatus.bind(this);
   }
 
   componentDidMount(){
@@ -21,17 +20,7 @@ class BooksApp extends React.Component {
     });
   }
 
-  addBook = () => {
-    this.setState(prev => {
-      const { books = [] } = prev;
-      const newBook = {
-      };
-      books.push(newBook);
-      return { books: books };
-    });
-  }
-
-  changeStatus(newStatus, currentBook) {
+  changeStatus = (newStatus, currentBook) => {
     this.setState(function(state){
       const { books = [] } = state;
       const allBooks = books.filter(_ => _.id !== currentBook.id);
@@ -87,6 +76,7 @@ class BooksApp extends React.Component {
             addBook={this.addBook}
             search={BooksAPI.search}
             changeStatus={this.changeStatus}
+            myCurrentBooks={this.state.books}
           />
         )}/>
       </div>
