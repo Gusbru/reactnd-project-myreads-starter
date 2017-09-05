@@ -1,8 +1,7 @@
 import React from 'react';
 import './Book.css'
 
-const Book = ({currentBooks, changeStatus}) => {
-    return(
+const Book = ({currentBooks, changeStatus}) => (
         <ol className="books-grid">
             {currentBooks.map(item => (
                 <li key={item.id}>                 
@@ -11,7 +10,7 @@ const Book = ({currentBooks, changeStatus}) => {
                             <div className="book-cover" style={{ width: 128, height: 192, backgroundImage: `url("${item.imageLinks.smallThumbnail}")` }}></div>
                             <div className="book-shelf-changer">
                                 <select value={item.shelf} onChange={(e) => changeStatus(e.target.value, item)}>
-                                    <option value="none" disabled>Move to...</option>
+                                    <option value="" disabled>Move to...</option>
                                     <option value="currentlyReading">Currently Reading</option>
                                     <option value="wantToRead">Want to Read</option>
                                     <option value="read">Read</option>
@@ -25,7 +24,6 @@ const Book = ({currentBooks, changeStatus}) => {
                 </li>
             ))}
         </ol>
-    );
-}
+)
 
 export default Book;
