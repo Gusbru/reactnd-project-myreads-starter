@@ -20,16 +20,6 @@ class BooksApp extends React.Component {
     });
   }
 
-  addBook = () => {
-    this.setState(prev => {
-      const { books = [] } = prev;
-      const newBook = {
-      };
-      books.push(newBook);
-      return { books: books };
-    });
-  }
-
   changeStatus = (newStatus, currentBook) => {
     this.setState(function(state){
       const { books = [] } = state;
