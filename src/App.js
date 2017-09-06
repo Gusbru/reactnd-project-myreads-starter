@@ -24,9 +24,7 @@ class BooksApp extends React.Component {
     this.setState(function(state){
       const { books = [] } = state;
       const allBooks = books.filter(_ => _.id !== currentBook.id);
-      if (newStatus !== "none") {
-        currentBook.shelf = newStatus
-      }
+      currentBook.shelf = newStatus;
       allBooks.push(currentBook);
       return{ books: allBooks };
     });
