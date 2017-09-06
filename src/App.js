@@ -63,12 +63,12 @@ class BooksApp extends React.Component {
               </div>
             </div>
             <Link 
-              to="/newbook" 
+              to="/search" 
               className="open-search"
             >Add a book</Link>
           </div>
         )}/>
-        <Route exact path="/newbook" render={() => (
+        <Route exact path="/search" render={() => (
           <NewBook 
             addBook={this.addBook}
             search={BooksAPI.search}
