@@ -1,5 +1,5 @@
 import React from 'react';
-import './Book.css'
+import './Book.css';
 
 const Book = ({currentBooks, changeStatus}) => (
         <ol className="books-grid">
