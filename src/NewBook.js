@@ -15,26 +15,24 @@ class NewBook extends Component {
         const self = this;
         if(inputText.length > 0) {
             this.props.search(inputText, 20)
-            .then(function(item){
-                if(item.length > 0) {
-                    item.map((searchedItems) => (
-                        searchedItems.shelf = "none"
-                    ))
-                    item.map((searchedItems) => (
-                        self.props.myCurrentBooks.map((myBooks) => (
-                            (myBooks.id === searchedItems.id 
-                                ? self.props.changeStatus(myBooks.shelf,searchedItems) 
-                                : searchedItems.shelf = "none") 
-                        ))
-                    ))
-                    self.setState({
-                        queryResult: item
-                    });
-                }
-                
+            .then(result => {
+                self.setState({
+                    queryResult: result.map(item => {
+                        const myBook = this.props.myCurrentBooks.find(book => book.id === item.id)
+                        if (myBook) {
+                            item.shelf = myBook.shelf
+                        } else {
+                            item.shelf = 'none'
+                        }
+
+                        return item;
+                    })
+                })
             })
-            .catch(function(error){
-                console.log(error);
+            .catch(error => {
+                self.setState({
+                    queryResult: []
+                });
             });
         } else {
             self.setState({
