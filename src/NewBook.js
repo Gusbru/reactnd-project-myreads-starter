@@ -6,7 +6,7 @@ import './NewBook.css';
 class NewBook extends Component {
 
     state = {
-        query: []
+        queryResult: []
     };
 
     
@@ -28,7 +28,7 @@ class NewBook extends Component {
                         ))
                     ))
                     self.setState({
-                        query: item
+                        queryResult: item
                     });
                 }
                 
@@ -38,7 +38,7 @@ class NewBook extends Component {
             });
         } else {
             self.setState({
-                query: []
+                queryResult: []
             })
         }
     };
@@ -46,7 +46,7 @@ class NewBook extends Component {
     
 
     render(){
-        let showingBooks = this.state.query;
+        let showingBooks = this.state.queryResult;
         return(
             <div>
                 <div className="search-books-bar">
